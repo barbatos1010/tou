@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh" style="height: 100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="./gong.css">
+</head>
+
+<body style="height: 100%; background-color: #f5f5f5;">
+    <div class="container-fluid" style="height: 100%;">
+        <nav class="col-lg-2 nav-sidebar" style="height: 100%; padding: 0;">
+            <div class="safety-officer clearfix">
+                <img src="./t01a7ffdc1388aa247b.jpg" alt="头像" class="avatar" />
+                <div class="info">
+                    值班安全负责人：xxx
+                </div>
+            </div>
+            <dl class="staff-monitoring">
+                <dt>人员监控</dt>
+                <dd>定员：<span class="fixedNum">6</span> 人</dd>
+                <dd>在线：<span class="onlineNum">4</span> 人</dd>
+                <dd>允许进入：<span class="allowNum">2</span> 人</dd>
+            </dl>
+            <dl class="fault-info">
+                    <dt>故障信息</dt>
+                    <dd>定员：<span class="fixedNum">6</span> 人</dd>
+                    <dd>在线：<span class="onlineNum">4</span> 人</dd>
+                    <dd>允许进入：<span class="allowNum">2</span> 人</dd>
+                </dl>
+        </nav>
+        <div class="col-lg-5 clearfix">
+            <div class="clearfix pie-big-box col-lg-12">
+                <div class=" pie-box col-lg-6" >
+                    <div id="capacityFactor" style="width: 200px;height:200px;"></div>
+                    <div class="pie-text">产能利用率(吨/时)</div>
+                </div>
+                <div class=" pie-box col-lg-6">
+                    <div id="estimate" style="width: 200px;height:200px;"></div>
+                    <div class="pie-text">今日预估产量</div>
+                </div>
+            </div>
+            <div id="online" class="online pull-left" style="width: 100%;height:300px;"></div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+</script>
+<script src="./echarts/echarts.js"></script>
+<script src="./echarts/green.js"></script>
+<script>
+    //在线药量
+    var online = echarts.init(document.getElementById('online'), 'wonderland');
+    var onlineOption = {
+        title: {
+            text: '实时在线药量',
+            textStyle:{
+                fontSize:16
+            }
+        },
+        tooltip: {
+
+        },
+        dataset: {
+            source: [
+                ['原材料', '雷管', '膨化1', '膨化2'],
+                ['15:23', 43.3, 85.8, 93.7],
+                ['15:24', 12, 15, 18],
+                ['15:25', 20, 22, 25],
+                ['15:26', 72.4, 53.9, 39.1],
+                ['15:27', 43.3, 85.8, 93.7],
+                ['15:28', 12, 15, 18],
+                ['15:29', 20, 22, 25],
+                ['15:30', 72.4, 53.9, 39.1]
+            ]
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {},
+        series: [{
+                type: 'bar'
+            },
+            {
+                type: 'bar'
+            },
+            {
+                type: 'bar'
+            }
+        ]
+    };
+    online.setOption(onlineOption)
+    //产能利用率
+    var capacityFactor = echarts.init(document.getElementById('capacityFactor'), 'wonderland');
+    var axislineColor = new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+        offset: 0,
+        color: 'rgba(78, 163, 151, 1)'
+    }, {
+        offset: 0.62,
+        color: 'rgba(78, 163, 151, 1)'
+    }, {
+        offset: 1,
+        color: 'rgba(78, 163, 151, 1)'
+    }]);
+
+    var capacityFactorOption = {
+        series: [{
+            name: '车辆总数',
+            type: 'gauge',
+            z: 1,
+            min: 0,
+            max: 10,
+            splitNumber: 10,
+            radius: '80%',
+            axisLine: { // 坐标轴线
+                show: false,
+                lineStyle: { // 属性lineStyle控制线条样式
+                    width: 0
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: true,
+                color: 'rgba(78, 163, 151, 1)'
+            },
+            splitLine: { // 分隔线
+                show: true,
+                length: 15,
+                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                    width: 1,
+                    color: 'rgba(78, 163, 151, 1)',
+                    opacity: 0.4
+                }
+            },
+            detail: {
+                show: false,
+            },
+            data: []
+        }, {
+            name: '车辆总数',
+            type: 'gauge',
+            z: 1,
+            min: 0,
+            max: 10,
+            splitNumber: 10,
+            radius: '90%',
+            axisLine: { // 坐标轴线
+                lineStyle: { // 属性lineStyle控制线条样式
+                    width: 2,
+                    color: [
+                        [1, 'rgba(78, 163, 151, 1)']
+                    ],
+                    opacity: 0.5
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: false,
+            },
+            splitLine: { // 分隔线
+                show: false,
+                length: 15,
+            },
+            detail: {
+                show: false,
+            },
+            data: []
+        }, {
+            name: '车辆总数',
+            type: 'gauge',
+            z: 2,
+            min: 0,
+            max: 10,
+            splitNumber: 10,
+            radius: '80%',
+            axisLine: { // 坐标轴线
+                lineStyle: { // 属性lineStyle控制线条样式
+                    width: 10,
+                    color: [
+                        [1, new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: 'rgba(78, 163, 151, 1)'
+                        }, {
+                            offset: 1,
+                            color: 'rgba(78, 163, 151, 1)'
+                        }])]
+                    ],
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: false
+            },
+            splitLine: { // 分隔线
+                show: false,
+                length: 15,
+                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                    color: 'rgba(78, 163, 151, 1)'
+                }
+            },
+            title: {
+                show: false,
+            },
+            detail: {
+                offsetCenter: [0, '100%'],
+                textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    color: 'rgba(78, 163, 151, 1)',
+                    fontSize: 22,
+                    fontWeight: 500
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: {
+                        x: "0.00",
+                        y: "0.00",
+                        x2: "1.00",
+                        y2: "1.00",
+                        type: "linear",
+                        global: false,
+                        colorStops: [{
+                            offset: 0,
+                            color: "rgba(78, 163, 151, 1)"
+                        }, {
+                            offset: 1,
+                            color: "rgba(78, 163, 151, 1)"
+                        }]
+                    }
+                }
+            },
+            pointer: {
+                show: true,
+                length: '65%',
+                width: 4
+            },
+            data: [{
+                value: 8.5,
+                name: '33'
+            }]
+        }]
+    };
+    capacityFactor.setOption(capacityFactorOption);
+    // 预估产量图
+    var estimate = echarts.init(document.getElementById('estimate'), 'wonderland');
+    var estimateOption = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        series: [{
+            name: '访问来源',
+            type: 'pie',
+            radius: ['65%', '80%'],
+            max: 100,
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: [{
+                    value: 60,
+                    name: '已完成',
+                    label: {
+                        normal: {
+                            formatter: function (params) {
+                                return  params.value + '%';
+                            },
+                            position: 'center',
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                },
+                {
+                    value: 30,
+                    name: '未完成'
+                }
+            ]
+        }]
+    };
+    estimate.setOption(estimateOption)
+</script>
+
+</html>
