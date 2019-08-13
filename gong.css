@@ -9,60 +9,48 @@ ul{
 }
 .nav-sidebar{
     font-size: 14px;
-    background-color: #343a40;
-    color:#c2c7d0;
+    /* background-color: #343a40; */
+    /* color:#c2c7d0; */
 }
 .container-fluid{
     padding: 0;
 }
-.nav-sidebar .logo{
-    line-height: 50px;
-    font-size: 15px;
-    font-weight: 700;
-    text-align: center;
-    border-bottom:1px solid #4f5962;
-}
 .nav-sidebar .safety-officer{
-    padding: 20px 0 20px 20px;
-    margin:0  auto;
-    border-bottom:1px solid #4f5962;
+    padding:15px 7px 15px 7px;
+    margin:15px 0 0 15px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 3px;
 }
 .nav-sidebar .safety-officer .avatar{
     width: 40px;
     height: 40px;
-    border: 1px solid #343a40;
     border-radius: 50%;
     margin: 0 10px 0 0; 
 }
 .nav-sidebar .safety-officer > *{
     float: left;
-    
 }
 .nav-sidebar .safety-officer .info{
     line-height: 40px;
 }
 .pie-box{
-    padding:0 40px;
+    padding:25px 15px;
     text-align: center;
-}
-.pie-big-box{
-    background-color: #fff;
-    box-shadow: 0px 0px 5px #ccc;
-    border-radius: 3px;
-    margin-top: 20px;
 }
 .pie-text{
     line-height:35px;
     font-size:16px;
     font-weight: 700;
+    text-align: center;
 }
-.online{  
+.productionLine{
     background-color: #fff;
     box-shadow: 0px 0px 5px #ccc;
     border-radius: 3px;
-    margin-top: 20px;
+    margin: 15px 0;
+    padding-top: 10px;
 }
-
 .staff-monitoring dt{
     font-size:18px;
     font-weight: 700;
@@ -79,5 +67,42 @@ ul{
 }
 .allowNum{
     color: rgba(85, 239, 196,1.0);
+}
+.staff-employed > div{
+    float: left;
+}
+.staff-employed .enter-into{
+    color:rgba(85, 239, 196,1.0); 
+}
+.enter-into{
+    padding-right: 3px;
+}
+.staff-monitoring,.fault-info{
+   
+    margin:15px 0 0 15px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 3px;
+}
+.staff-monitoring dt,.fault-info dt{
+    padding: 10px;
+    border-bottom: 2px #ccc solid;
+}
+.staff-monitoring dd,.fault-info dd{
+    padding: 5px 15px;
+}
+.fault-info dd{
+    border-bottom: 1px #ccc solid;
+}
+.facility-item .normal ,.facility-item .damage{
+    height: 80px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.facility-item .normal{
+    background-color: #55efc4;
+}
+.facility-item .damage{
+    background-color: #fab1a0;
 }
 

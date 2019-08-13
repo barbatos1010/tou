@@ -29,30 +29,113 @@
             </div>
             <dl class="staff-monitoring">
                 <dt>人员监控</dt>
+                <dd class="staff-employed clearfix">
+                    <div class="enter-into">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="glyphicon glyphicon-user"></span>
+                    </div>
+                    <div class="surplus">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="glyphicon glyphicon-user"></span>
+                    </div>
+                </dd>
                 <dd>定员：<span class="fixedNum">6</span> 人</dd>
                 <dd>在线：<span class="onlineNum">4</span> 人</dd>
                 <dd>允许进入：<span class="allowNum">2</span> 人</dd>
             </dl>
             <dl class="fault-info">
-                    <dt>故障信息</dt>
-                    <dd>定员：<span class="fixedNum">6</span> 人</dd>
-                    <dd>在线：<span class="onlineNum">4</span> 人</dd>
-                    <dd>允许进入：<span class="allowNum">2</span> 人</dd>
-                </dl>
+                <dt>故障信息</dt>
+                <dd>零级故障：<span style="color: red;">0</span> / 0</dd>
+                <dd>一级故障：<span style="color: red;">5</span> / 3</dd>
+                <dd>二级故障：<span style="color: red;">3</span> / 2</dd>
+            </dl>
         </nav>
-        <div class="col-lg-5 clearfix">
-            <div class="clearfix pie-big-box col-lg-12">
-                <div class=" pie-box col-lg-6" >
-                    <div id="capacityFactor" style="width: 200px;height:200px;"></div>
-                    <div class="pie-text">产能利用率(吨/时)</div>
-                </div>
-                <div class=" pie-box col-lg-6">
-                    <div id="estimate" style="width: 200px;height:200px;"></div>
-                    <div class="pie-text">今日预估产量</div>
+        <div class="col-lg-10">
+            <div class=" clearfix productionLine">
+                <div id="online" class="online col-lg-7 " style="height:300px;"></div>
+                <div class="clearfix pie-big-box col-lg-5">
+                    <div class=" pie-box col-lg-6">
+                        <div id="capacityFactor" style="width: 200px;height:200px;"></div>
+                        <div class="pie-text">产能利用率(吨/时)</div>
+                    </div>
+                    <div class=" pie-box col-lg-6">
+                        <div id="estimate" style="width: 200px;height:200px;"></div>
+                        <div class="pie-text">今日预估产量</div>
+                    </div>
                 </div>
             </div>
-            <div id="online" class="online pull-left" style="width: 100%;height:300px;"></div>
+            <div class="col-lg-8">
+                <ul class="facility-list">
+                    <li class="facility-item col-lg-2">
+                        <div class="damage">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+                    <li class="facility-item  col-lg-2">
+                        <div class="normal">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+                    <li class="facility-item col-lg-2">
+                        <div class="damage">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+                    <li class="facility-item  col-lg-2">
+                        <div class="normal">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+                    <li class="facility-item col-lg-2">
+                        <div class="damage">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+                    <li class="facility-item  col-lg-2">
+                        <div class="normal">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+                    <li class="facility-item col-lg-2">
+                        <div class="damage">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+                    <li class="facility-item  col-lg-2">
+                        <div class="normal">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+
+                    <li class="facility-item col-lg-2">
+                        <div class="damage">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+                    <li class="facility-item  col-lg-2">
+                        <div class="normal">
+                            <span>水箱储罐1</span>
+                            <span></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+
+            </div>
         </div>
+
     </div>
 </body>
 
@@ -71,8 +154,8 @@
     var onlineOption = {
         title: {
             text: '实时在线药量',
-            textStyle:{
-                fontSize:16
+            textStyle: {
+                fontSize: 16
             }
         },
         tooltip: {
@@ -293,7 +376,7 @@
                     label: {
                         normal: {
                             formatter: function (params) {
-                                return  params.value + '%';
+                                return params.value + '%';
                             },
                             position: 'center',
                             show: true,
